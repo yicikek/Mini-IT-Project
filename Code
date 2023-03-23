@@ -1,1 +1,42 @@
+def rules():
+    print("In this game players are supposed to guess the correct word with designated amount of tries depending on the difficulty they pick in order to win the game. \n There are a few rules players should know of before playing the game: \n 1. Players are not allowed to search for any type of clues online to win the game. \n 2. A correct letter placed in the correct order will turn into BOLD \n 3. A correct letter placed in the wrong order will turn into ITALIC \n 4. An incorrect letter will remain with the default text styles \n 5. Answers are NEVER plurals ")
+    confirm = str(input("Do you understand the rules of this game(y/n): "))
+    if confirm == "y":
+        game()
+    elif confirm == "n":
+        print("Please make sure you understand the rules before proceeding with the game!")
+        home()
+    else:
+        print("Invalid option. Please try again!")
+        home()
 
+def quit():
+    print("Thank you for trying our game! We hope to see you again!")
+
+def home(option=None ):
+#Here we define the function for users to pick their choice of function in the program
+    print ("Hey! Welcome to our Word Guessing Game! If you want to play the game please proceed with the RULES and REGULATION option")
+    print ("1. Login")
+    print ("2. Signup")
+    print ("3. Rules and Regulation")
+    print ("4. Quit")
+    option = str(input ("Please select a number: "))
+    #Then we let user the pick any functions from the list
+
+    if option == "1":
+        login()
+
+    elif option == "2":
+        signup()
+    
+    elif option == "3":
+        rules()
+        
+    elif option == "4":
+        quit()
+        
+    else:
+        print("Please enter an option given in the list!")
+        home()
+     
+home()
