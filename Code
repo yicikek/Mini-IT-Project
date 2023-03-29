@@ -1,3 +1,122 @@
+def login(): 
+    db = open("database.py","r")
+    global Username
+    print("\n-----------------------Login-----------------------")
+    user_login = str(input("Username: "))
+    pass_login = str(input("Password: "))
+    
+    d = [] #empty list to store Username
+    p = [] #empty list to store password
+    for i in db: #to split my text in database
+        a,b = i.split(",")
+        b = b.strip() #to remove the character infront the username so that username can stand alone
+        #append the usename and password into the text file
+        d.append(a)
+        p.append(b)
+    data = dict(zip(d, p))# make it to the pair and read the data 
+        
+    try:
+        if data[user_login]:
+        #if data contain the username try following
+            try: 
+                if pass_login == data[user_login]:
+                #check if password and username is it match
+                       
+                    print("\nAccess Permitted.")
+                    print("Hi,", user_login)
+                    game()  
+                        
+                else:
+                    print("Password or Username incorrect")
+                    ask01 = str(input("Do you wish to try logging in again?(y/n): "))
+                    if ask01 == "y":
+                        login()
+                    else:
+                        home()
+            except:
+                print("Thanks for joining us")
+                game()
+                
+        else:
+            print("Username or password doesn't exist")
+            ask03 = str(input("Do you wish to try logging in again?(y/n): "))
+            if ask03 == "y":
+                login()
+            else:
+                home()
+    except:
+        print("Username or password doesn't exist")
+        ask04 = str(input("Do you wish to try logging in again?(y/n): "))
+        if ask04 == "y":
+            login()
+        else:
+            home()
+
+def signup():
+    db = open("database.py","r")#read the database textfile
+    print("\n-----------------------Sign up-----------------------")
+    user_signup = str(input("Username: "))
+    pass_signup = str(input("Password(6-8 letter and characters): "))
+    conf_pass_signup = str(input("Confirm Your Password: "))
+        
+    d = [] #empty list to store Username
+    p = [] #empty list to store password
+    for i in db: #to split my text in database
+        a,b = i.split(",")
+        b = b.strip() #to remove the character infront the username so that username can stand alone
+        #append the usename and password into the text file
+        d.append(a)
+        p.append(b)
+    data = dict(zip(d, p))# make it to the pair and read the data 
+        
+    if(pass_signup != conf_pass_signup): 
+        print("Acces Denied.")
+        ask1 = str(input("Do you wish to continue registering an account?(y/n) "))
+        if ask1 == "y":
+            signup()
+        else:
+            home()
+            
+    else:
+        #Deny user to proceed if the password doesn't match the requirement.
+        if len(pass_signup) < 6:
+            print ("Your password should be between 6-8 characters.")
+            ask2 = str(input("Do you wish to continue registering an account?(y/n): "))
+            if ask2 == "y":
+                signup()
+            else:
+                home()
+                
+        elif len(pass_signup) > 8:
+            print ("Your password should be between 6-8 characters.")
+            ask3 = str(input("Do you wish to continue registering an account?(y/n): "))
+            if ask3 == "y":
+                signup()
+            else:
+                home()
+        
+        #Deny user to proceed if the username already exists in the "d" text file
+        elif user_signup in d:
+            print("Username already exists, please try again.")
+            ask3 = str(input("Do you wish to continue registering an account?(y/n) "))
+            if ask3 == "y":
+                signup()
+            else:
+                home()
+
+        # Opens a file for both appending and reading. The file pointer is at the end of the file if the file exists. The file opens in the append mode. 
+        # If the file does not exist, it creates a new file for reading and writing.    
+        else:
+            db = open("database.py", "a+") 
+            db.write(user_signup+", "+pass_signup+"\n") #\n a type of escape character that will create a new line when used. 
+            db.close()
+            print("Success!")
+            suc_1 = input("Do you want to back to main page or login?(h/l): ")
+            if suc_1 == "l":
+                login()
+            else:
+                home()
+
 def rules():
     print("In this game players are supposed to guess the correct word with designated amount of tries depending on the difficulty they pick in order to win the game. \n There are a few rules players should know of before playing the game: \n 1. Players are not allowed to search for any type of clues online to win the game. \n 2. A correct letter placed in the correct order will turn into BOLD \n 3. A correct letter placed in the wrong order will turn into ITALIC \n 4. An incorrect letter will remain with the default text styles \n 5. Answers are NEVER plurals ")
     confirm = str(input("Do you understand the rules of this game(y/n): "))
