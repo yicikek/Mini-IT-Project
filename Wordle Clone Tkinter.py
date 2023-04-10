@@ -1,11 +1,6 @@
 import random
-import os
 from tkinter import *
 from tkinter import messagebox
-
-# Clears screen
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Randomly selects word
 def select_word():
@@ -14,12 +9,11 @@ def select_word():
         words = list(map(str, allText.split()))
         return random.choice(words)
     
+# Clears input    
 def clear_text(text):
     text.delete(0, END)
 
-# Start
-clear()
-
+# Game window
 game = Tk()
 
 GREEN = "#007d21"
@@ -34,9 +28,11 @@ game.config(bg=BLACK)
 tries = 0
 selected_word = str(select_word())
 
+# Input for word guess
 word_input = Entry(game)
 word_input.grid(row=999, column=0, columnspan=3, padx=10, pady=10)
 
+# Game logic
 def get_guess():
 
     with open("valid-wordle-words.txt", "r") as file:
@@ -46,18 +42,19 @@ def get_guess():
     global selected_word
     guessed_word = word_input.get().lower()
 
-    messagebox.showinfo(selected_word)
-
     global tries
 
     if tries < 5:
 
+        # Checks if length of words are the same
         if len(guessed_word) != len(selected_word):
             messagebox.showerror("Error", f"Word length is too short or too long.\nPlease input a {len(selected_word)}-letter word.")
 
+        # Checks if word is valid
         if guessed_word not in allowed:
             messagebox.showerror("Error", "Word not in word list.")
 
+        # Checks if both words are the same
         elif guessed_word == selected_word:
 
             for i, letter in enumerate(guessed_word):
@@ -68,6 +65,7 @@ def get_guess():
 
             messagebox.showinfo("Congratulations!", "You guessed the word!")
 
+        # Checks if letters match
         else:
 
             feedback = []
@@ -97,21 +95,27 @@ def get_guess():
                     label = Label(game, text=a.upper())
                     label.grid(row=tries, column=i, padx=10, pady=10)
 
+                    # Letters match, same position
                     if a == b:
                         label.config(bg=GREEN, fg=BLACK)
 
+                    # Letters match, wrong position
                     elif b == "$":
                         label.config(bg=YELLOW, fg=BLACK)
-                                
+
+                    # Letters don't match            
                     else:
                         label.config(bg=BLACK, fg=WHITE)
 
             tries += 1
 
+    # Game over
     if tries == 5:
         messagebox.showerror("You failed!", f"The word is {selected_word.upper()}")
 
+# Button to submit guess
 word_guess_button = Button(game, text="Submit", command=lambda:[get_guess(), clear_text(word_input)])
 word_guess_button.grid(row=999, column=3, columnspan=2)
 
+# Game loop
 game.mainloop()
