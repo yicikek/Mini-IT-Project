@@ -1,6 +1,6 @@
 def login(): 
     db = open("database.py","r")
-    global Username
+    global user_login
     print("\n-----------------------Login-----------------------")
     user_login = str(input("Username: "))
     pass_login = str(input("Password: "))
@@ -24,7 +24,7 @@ def login():
                        
                     print("\nAccess Permitted.")
                     print("Hi,", user_login)
-                    game()  
+                    
                         
                 else:
                     print("Password or Username incorrect")
@@ -35,7 +35,7 @@ def login():
                         home()
             except:
                 print("Thanks for joining us")
-                game()
+                
                 
         else:
             print("Username or password doesn't exist")
@@ -52,8 +52,40 @@ def login():
         else:
             home()
 
+def xpsystem(user_login):
+    xp = 100
+    lvl = 1
+    
+    while True:
+        if xp >= 100:   
+            lvl += 1
+            xp -= 100
+        else:
+            lvl = lvl + 0 
+    
+    #create a variable to check user's existence 
+    user_exists = False
+    with open("lvl_database.py", "r+") as lvlfile:
+        lines = lvlfile.readlines()
+        for i, line in enumerate(lines):
+            if line.startswith(user_login):
+                lvlParts = line.split(":")
+                new_lvl = lvl
+                existing_lvl = int(new_lvl) + int(lvl)
+                new_line = f"{user_login}:{new_lvl}\n"
+                lines[i] = new_line
+                user_exists = True
+                break
+            if not user_exists:
+                lvlfile.write(f"{user_login}:{new_lvl}\n")
+            else:
+                lvlfile.seek(0)
+                lvlfile.writelines(lines)
+                lvlfile.close()
+    
 def signup():
-    db = open("database.py","r")#read the database textfile
+    db = open("database.py", "r") #read the database textfile
+    lvl_db = open("lvl_database.py", "r")
     print("\n-----------------------Sign up-----------------------")
     user_signup = str(input("Username: "))
     pass_signup = str(input("Password(6-8 letter and characters): "))
@@ -110,6 +142,10 @@ def signup():
             db = open("database.py", "a+") 
             db.write(user_signup+", "+pass_signup+"\n") #\n a type of escape character that will create a new line when used. 
             db.close()
+            user_xp = "0"
+            lvl_db = open("lvl_database.py", "a+")
+            lvl_db.write(user_signup+", "+user_xp+"\n")
+            lvl_db.close()
             print("Success!")
             suc_1 = input("Do you want to back to main page or login?(h/l): ")
             if suc_1 == "l":
@@ -121,7 +157,7 @@ def rules():
     print("In this game players are supposed to guess the correct word with designated amount of tries depending on the difficulty they pick in order to win the game. \n There are a few rules players should know of before playing the game: \n 1. Players are not allowed to search for any type of clues online to win the game. \n 2. A correct letter placed in the correct order will turn into BOLD \n 3. A correct letter placed in the wrong order will turn into ITALIC \n 4. An incorrect letter will remain with the default text styles \n 5. Answers are NEVER plurals ")
     confirm = str(input("Do you understand the rules of this game(y/n): "))
     if confirm == "y":
-        game()
+        home()
     elif confirm == "n":
         print("Please make sure you understand the rules before proceeding with the game!")
         home()
