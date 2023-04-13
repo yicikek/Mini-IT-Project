@@ -552,7 +552,7 @@ def difficulty():
 
     description = ttk.Label(
         level_frame, 
-        text = "- Guess a 5 letter word\n- Unlimited amount of tries")
+        text = "- Guess a 5 letter word\n- Complete within 10 tries")
 
 
     button1.pack(side = "left", padx = 20)
