@@ -47,9 +47,6 @@ def gamegui():
     
     frame4 = tk.Frame(game)
     frame4.place(x=0, y=0, width=800, height=500)
-    
-    gametitle = tk.Label(frame4, text='Word Guessing Game', font=('Arial', 30))
-    gametitle.pack(pady=25)
         
     tries = 0
     selected_word = str(select_word())
@@ -68,6 +65,10 @@ def gamegui():
 
 # Game logic
 def get_guess():
+
+    frame6 = tk.Frame()
+    frame6.pack(anchor="center", background=LIGHTORANGE)
+
     with open("valid-wordle-words.txt", "r") as file:
         allText = file.read()
         allowed = list(map(str, allText.split()))
@@ -124,7 +125,7 @@ def get_guess():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(game, text=a.upper())
+                    label = tk.Label(frame6, text=a.upper())
                     label.grid(row=tries, column=i, padx=10, pady=10)
 
                     # Letters match, same position
@@ -155,9 +156,6 @@ def gamegui_easy():
     
     frame4 = tk.Frame(game)
     frame4.place(x=0, y=0, width=800, height=500)
-    
-    gametitle = tk.Label(frame4, text='Word Guessing Game', font=('Arial', 30))
-    gametitle.pack(pady=15)
         
     tries = 0
     selected_word = str(select_word())
@@ -176,6 +174,9 @@ def gamegui_easy():
 
 # Game logic
 def get_guess_easy():
+
+    frame6 = tk.Frame()
+    frame6.pack(anchor="center", background=LIGHTGREEN)
 
     with open("valid-wordle-words.txt", "r") as file:
         allText = file.read()
@@ -263,9 +264,6 @@ def gamegui_hard():
     
     frame4 = tk.Frame(game)
     frame4.place(x=0, y=0, width=800, height=500)
-    
-    gametitle = tk.Label(frame4, text='Word Guessing Game', font=('Arial', 30))
-    gametitle.pack(pady=25)
         
     tries = 0
     selected_word = str(select_word2())
@@ -284,6 +282,9 @@ def gamegui_hard():
 
 # Game logic
 def get_guess_hard():
+
+    frame6 = tk.Frame()
+    frame6.pack(anchor="center", background=LIGHTRED)
 
     with open("difficult-wordle-words.txt", "r") as file:
         allText = file.read()
