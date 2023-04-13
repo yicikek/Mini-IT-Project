@@ -66,8 +66,8 @@ def gamegui():
 # Game logic
 def get_guess():
 
-    frame6 = tk.Frame()
-    frame6.pack(anchor="center", background=LIGHTORANGE)
+    frame66 = tk.Frame()
+    frame66.pack(anchor="center")
 
     with open("valid-wordle-words.txt", "r") as file:
         allText = file.read()
@@ -91,7 +91,7 @@ def get_guess():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(game, text=letter.upper())
+                win = tk.Label(frame66, text=letter.upper())
                 win.grid(row=tries, column=i, padx=10, pady=10)
                 win.config(bg=GREEN, fg=BLACK)
 
@@ -125,7 +125,7 @@ def get_guess():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(frame6, text=a.upper())
+                    label = tk.Label(frame66, text=a.upper())
                     label.grid(row=tries, column=i, padx=10, pady=10)
 
                     # Letters match, same position
@@ -175,8 +175,8 @@ def gamegui_easy():
 # Game logic
 def get_guess_easy():
 
-    frame6 = tk.Frame()
-    frame6.pack(anchor="center", background=LIGHTGREEN)
+    frame8 = tk.Frame()
+    frame8.pack(anchor="center")
 
     with open("valid-wordle-words.txt", "r") as file:
         allText = file.read()
@@ -200,7 +200,7 @@ def get_guess_easy():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(game, text=letter.upper())
+                win = tk.Label(frame8, text=letter.upper())
                 win.grid(row=tries, column=i, padx=10, pady=10)
                 win.config(bg=GREEN, fg=BLACK)
 
@@ -234,7 +234,7 @@ def get_guess_easy():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(game, text=a.upper())
+                    label = tk.Label(frame8, text=a.upper())
                     label.grid(row=tries, column=i, padx=10, pady=10)
 
                     # Letters match, same position
@@ -284,7 +284,7 @@ def gamegui_hard():
 def get_guess_hard():
 
     frame6 = tk.Frame()
-    frame6.pack(anchor="center", background=LIGHTRED)
+    frame6.pack(anchor="center")
 
     with open("difficult-wordle-words.txt", "r") as file:
         allText = file.read()
@@ -308,7 +308,7 @@ def get_guess_hard():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(game, text=letter.upper())
+                win = tk.Label(frame6, text=letter.upper())
                 win.grid(row=tries, column=i, padx=10, pady=10, x=365, y=120)
                 win.config(bg=GREEN, fg=BLACK)
 
@@ -342,7 +342,7 @@ def get_guess_hard():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(game, text=a.upper())
+                    label = tk.Label(frame6, text=a.upper())
                     label.grid(row=tries, column=i, padx=10, pady=10)
 
                     # Letters match, same position
