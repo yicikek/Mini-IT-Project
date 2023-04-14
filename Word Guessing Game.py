@@ -36,7 +36,7 @@ LIGHTGREEN = "#b7e4c7"
 LIGHTRED = "#ff758f"
 LIGHTORANGE = "#fec89a"
 
-game.title("Wordle")
+game.title("Word Guessing Game")
 game.geometry("800x500")
 game.config(bg=BLACK)
 
@@ -53,22 +53,18 @@ def gamegui():
 
     # Input for word guess
     word_input = tk.Entry(frame4)
-    word_input.place(x=315, y=330)
+    word_input.place(x=340, y=330)
     
     # Button to submit guess
     word_guess_button = tk.Button(frame4, text="Submit", command=lambda:[get_guess(), clear_text(word_input)])
-    word_guess_button.place(x=365, y=360)
+    word_guess_button.place(x=380, y=360)
 
     # button to return to difficulty screen
     button_logout = tk.Button(game, text = "<--", command=difficulty)
     button_logout.place(x=0, y=0)
 
-# Game logic
+    
 def get_guess():
-
-    frame66 = tk.Frame()
-    frame66.pack(anchor="center")
-
     with open("valid-wordle-words.txt", "r") as file:
         allText = file.read()
         allowed = list(map(str, allText.split()))
@@ -77,6 +73,10 @@ def get_guess():
 
     global tries
     if tries < 5:
+
+        # create new frame for each guess
+        guess_frame = tk.Frame(game)
+        guess_frame.place(x=320, y=50*tries, width=800, height=50)
 
         # Checks if length of words are the same
         if len(guessed_word) != len(selected_word):
@@ -91,8 +91,8 @@ def get_guess():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(frame66, text=letter.upper())
-                win.grid(row=tries, column=i, padx=10, pady=10)
+                win = tk.Label(guess_frame, text=letter.upper())
+                win.grid(row=0, column=i, padx=10, pady=10)
                 win.config(bg=GREEN, fg=BLACK)
 
             messagebox.showinfo("Congratulations!", "You guessed the word!")
@@ -125,8 +125,8 @@ def get_guess():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(frame66, text=a.upper())
-                    label.grid(row=tries, column=i, padx=10, pady=10)
+                    label = tk.Label(guess_frame, text=a.upper())
+                    label.grid(row=0, column=i, padx=10, pady=10)
 
                     # Letters match, same position
                     if a == b:
@@ -162,11 +162,11 @@ def gamegui_easy():
 
     # Input for word guess
     word_input = tk.Entry(frame4)
-    word_input.place(x=315, y=405)
+    word_input.place(x=340, y=405)
     
     # Button to submit guess
     word_guess_button = tk.Button(frame4, text="Submit", command=lambda:[get_guess_easy(), clear_text(word_input)])
-    word_guess_button.place(x=365, y=435)
+    word_guess_button.place(x=380, y=435)
 
     # button to return to difficulty screen
     button_logout = tk.Button(game, text = "<--", command=difficulty)
@@ -174,9 +174,6 @@ def gamegui_easy():
 
 # Game logic
 def get_guess_easy():
-
-    frame8 = tk.Frame()
-    frame8.pack(anchor="center")
 
     with open("valid-wordle-words.txt", "r") as file:
         allText = file.read()
@@ -186,6 +183,9 @@ def get_guess_easy():
 
     global tries
     if tries < 10:
+        guess_frame1 = tk.Frame(game)
+        guess_frame1.place(x=320, y=50*tries, width=800, height=50)
+
 
         # Checks if length of words are the same
         if len(guessed_word) != len(selected_word):
@@ -200,8 +200,8 @@ def get_guess_easy():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(frame8, text=letter.upper())
-                win.grid(row=tries, column=i, padx=10, pady=10)
+                win = tk.Label(guess_frame1, text=letter.upper())
+                win.grid(row=0, column=i, padx=10, pady=10)
                 win.config(bg=GREEN, fg=BLACK)
 
             messagebox.showinfo("Congratulations!", "You guessed the word!")
@@ -234,8 +234,8 @@ def get_guess_easy():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(frame8, text=a.upper())
-                    label.grid(row=tries, column=i, padx=10, pady=10)
+                    label = tk.Label(guess_frame1, text=a.upper())
+                    label.grid(row=0, column=i, padx=10, pady=10)
 
                     # Letters match, same position
                     if a == b:
@@ -270,11 +270,11 @@ def gamegui_hard():
 
     # Input for word guess
     word_input = tk.Entry(frame4)
-    word_input.place(x=315, y=330)
+    word_input.place(x=340, y=330)
     
     # Button to submit guess
     word_guess_button = tk.Button(frame4, text="Submit", command=lambda:[get_guess_hard(), clear_text2(word_input)])
-    word_guess_button.place(x=365, y=360)
+    word_guess_button.place(x=380, y=360)
 
     # button to return to difficulty screen
     button_logout = tk.Button(game, text = "<--", command=difficulty)
@@ -282,9 +282,6 @@ def gamegui_hard():
 
 # Game logic
 def get_guess_hard():
-
-    frame6 = tk.Frame()
-    frame6.pack(anchor="center")
 
     with open("difficult-wordle-words.txt", "r") as file:
         allText = file.read()
@@ -294,6 +291,9 @@ def get_guess_hard():
 
     global tries
     if tries < 5:
+        guess_frame2 = tk.Frame(game)
+        guess_frame2.place(x=290, y=50*tries, width=800, height=50)
+
 
         # Checks if length of words are the same
         if len(guessed_word) != len(selected_word):
@@ -308,8 +308,8 @@ def get_guess_hard():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(frame6, text=letter.upper())
-                win.grid(row=tries, column=i, padx=10, pady=10, x=365, y=120)
+                win = tk.Label(guess_frame2, text=letter.upper())
+                win.grid(row=0, column=i, padx=10, pady=10)
                 win.config(bg=GREEN, fg=BLACK)
 
             messagebox.showinfo("Congratulations!", "You guessed the word!")
@@ -342,8 +342,8 @@ def get_guess_hard():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(frame6, text=a.upper())
-                    label.grid(row=tries, column=i, padx=10, pady=10)
+                    label = tk.Label(guess_frame2, text=a.upper())
+                    label.grid(row=0, column=i, padx=10, pady=10)
 
                     # Letters match, same position
                     if a == b:
@@ -364,7 +364,6 @@ def get_guess_hard():
         messagebox.showerror("You failed!", f"The word is {selected_word.upper()}")
         difficulty()
 
-    
 
 # Login page
 def login():
