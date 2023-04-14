@@ -36,7 +36,7 @@ LIGHTGREEN = "#b7e4c7"
 LIGHTRED = "#ff758f"
 LIGHTORANGE = "#fec89a"
 
-game.title("Wordle")
+game.title("Word Guessing Game")
 game.geometry("800x500")
 game.config(bg=BLACK)
 
@@ -53,11 +53,11 @@ def gamegui():
 
     # Input for word guess
     word_input = tk.Entry(frame4)
-    word_input.place(x=315, y=330)
+    word_input.place(x=340, y=330)
     
     # Button to submit guess
     word_guess_button = tk.Button(frame4, text="Submit", command=lambda:[get_guess(), clear_text(word_input)])
-    word_guess_button.place(x=365, y=360)
+    word_guess_button.place(x=380, y=360)
 
     # button to return to difficulty screen
     button_logout = tk.Button(game, text = "<--", command=difficulty)
@@ -162,11 +162,11 @@ def gamegui_easy():
 
     # Input for word guess
     word_input = tk.Entry(frame4)
-    word_input.place(x=315, y=405)
+    word_input.place(x=340, y=405)
     
     # Button to submit guess
     word_guess_button = tk.Button(frame4, text="Submit", command=lambda:[get_guess_easy(), clear_text(word_input)])
-    word_guess_button.place(x=365, y=435)
+    word_guess_button.place(x=380, y=435)
 
     # button to return to difficulty screen
     button_logout = tk.Button(game, text = "<--", command=difficulty)
@@ -270,11 +270,11 @@ def gamegui_hard():
 
     # Input for word guess
     word_input = tk.Entry(frame4)
-    word_input.place(x=315, y=330)
+    word_input.place(x=340, y=330)
     
     # Button to submit guess
     word_guess_button = tk.Button(frame4, text="Submit", command=lambda:[get_guess_hard(), clear_text2(word_input)])
-    word_guess_button.place(x=365, y=360)
+    word_guess_button.place(x=380, y=360)
 
     # button to return to difficulty screen
     button_logout = tk.Button(game, text = "<--", command=difficulty)
