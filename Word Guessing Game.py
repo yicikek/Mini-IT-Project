@@ -93,7 +93,7 @@ def get_guess():
 
         # create new frame for each guess
         guess_frame = tk.Frame(game)
-        guess_frame.place(x=320, y=110+50*tries , width=800, height=50)
+        guess_frame.place(x=3210, y=110+50*tries , width=800, height=50)
 
         # Checks if length of words are the same
         if len(guessed_word) != len(selected_word):
@@ -108,10 +108,12 @@ def get_guess():
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(guess_frame, text=letter.upper(),font=('Arial', 10))
-                win.grid(row=tries, column=i, padx=10, pady=10)
-                win.config(bg=GREEN, fg=BLACK)
+                square_frame = tk.Frame(guess_frame, width=20, height=20, bg=GREEN)
+                square_frame.grid(row=tries, column=i, padx=10, pady=10)
 
+                win = tk.Label(square_frame, text=letter.upper(), font=('Arial', 10), fg=BLACK, bg=GREEN)
+                win.place(relx=0.5, rely=0.5, anchor='center')
+                            
             xp = sum + 50
 
             # create a variable to check if the username exists or not
@@ -172,20 +174,28 @@ def get_guess():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(guess_frame, text=a.upper(),font=('Arial', 10))
-                    label.grid(row=tries, column=i, padx=10, pady=10)
+                    
+                    square_frame = tk.Frame(guess_frame, width=20, height=20)
+                    square_frame.grid(row=tries, column=i, padx=10, pady=10)
 
+                    label = tk.Label(square_frame, text=a.upper(), font=('Arial', 10))
+                    label.place(relx=0.5, rely=0.5, anchor='center')
+                                
                     # Letters match, same position
                     if a == b:
+                        square_frame.config(bg=GREEN)
                         label.config(bg=GREEN, fg=BLACK)
 
                     # Letters match, wrong position
                     elif b == "$":
+                        square_frame.config(bg=YELLOW)
                         label.config(bg=YELLOW, fg=BLACK)
 
                     # Letters don't match            
                     else:
+                        square_frame.config(bg=BLACK)
                         label.config(bg=BLACK, fg=WHITE)
+
 
             tries += 1
 
@@ -246,7 +256,7 @@ def get_guess_easy():
     global tries
     if tries < 10:
         guess_frame1 = tk.Frame(game)
-        guess_frame1.place(x=320, y=80+40*tries, width=800, height=30)
+        guess_frame1.place(x=310, y=80+40*tries, width=800, height=30)
 
 
         # Checks if length of words are the same
@@ -261,11 +271,13 @@ def get_guess_easy():
         elif guessed_word == selected_word:
 
             for i, letter in enumerate(guessed_word):
+                
+                square_frame = tk.Frame(guess_frame1, width=20, height=20, bg=GREEN)
+                square_frame.grid(row=tries, column=i, padx=10, pady=10)
 
-                win = tk.Label(guess_frame1, text=letter.upper(),font=('Arial', 10))
-                win.grid(row=tries, column=i, padx=10, pady=10)
-                win.config(bg=GREEN, fg=BLACK)
-
+                win = tk.Label(square_frame, text=letter.upper(), font=('Arial', 10), fg=BLACK, bg=GREEN)
+                win.place(relx=0.5, rely=0.5, anchor='center')
+                            
             xp = sum + 25
 
               # create a variable to check if the username exists or not
@@ -325,19 +337,26 @@ def get_guess_easy():
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(guess_frame1, text=a.upper(),font=('Arial', 10))
-                    label.grid(row=tries, column=i, padx=10, pady=10)
+                    
+                    square_frame = tk.Frame(guess_frame1, width=20, height=20)
+                    square_frame.grid(row=tries, column=i, padx=10, pady=10)
 
+                    label = tk.Label(square_frame, text=a.upper(), font=('Arial', 10))
+                    label.place(relx=0.5, rely=0.5, anchor='center')
+                                
                     # Letters match, same position
                     if a == b:
+                        square_frame.config(bg=GREEN)
                         label.config(bg=GREEN, fg=BLACK)
 
                     # Letters match, wrong position
                     elif b == "$":
+                        square_frame.config(bg=YELLOW)
                         label.config(bg=YELLOW, fg=BLACK)
 
                     # Letters don't match            
                     else:
+                        square_frame.config(bg=BLACK)
                         label.config(bg=BLACK, fg=WHITE)
 
             tries += 1
@@ -375,7 +394,7 @@ def gamegui_hard():
     word_input.bind('<Return>', lambda event:word_guess_button.invoke())
     
     # Button to submit guess
-    word_guess_button = tk.Button(frame4, text="Submit",cursor='hand2', command=lambda:[get_guess_hard(username), clear_text2(word_input)])
+    word_guess_button = tk.Button(frame4, text="Submit",cursor='hand2', command=lambda:[get_guess_hard(), clear_text2(word_input)])
     word_guess_button.place(x=380, y=435)
 
     # button to return to difficulty screen
@@ -383,7 +402,7 @@ def gamegui_hard():
     button_logout.place(x=0, y=0)
 
 # Game logic
-def get_guess_hard(username):
+def get_guess_hard():
     global xp
     global new_xp 
     global existing_xp
@@ -398,7 +417,7 @@ def get_guess_hard(username):
     global tries
     if tries < 5:
         guess_frame2 = tk.Frame(game)
-        guess_frame2.place(x=290, y=110+50*tries, width=800, height=50)
+        guess_frame2.place(x=265, y=110+50*tries, width=800, height=50)
 
 
         # Checks if length of words are the same
@@ -414,9 +433,12 @@ def get_guess_hard(username):
 
             for i, letter in enumerate(guessed_word):
 
-                win = tk.Label(guess_frame2, text=letter.upper(),font=('Arial', 10))
-                win.grid(row=tries, column=i, padx=10, pady=10)
-                win.config(bg=GREEN, fg=BLACK)
+                square_frame = tk.Frame(guess_frame2, width=20, height=20, bg=GREEN)
+                square_frame.grid(row=tries, column=i, padx=10, pady=10)
+
+                win = tk.Label(square_frame, text=letter.upper(), font=('Arial', 10), fg=BLACK, bg=GREEN)
+                win.place(relx=0.5, rely=0.5, anchor='center')
+                            
 
             xp = sum + 100
             username_exists = False
@@ -480,20 +502,27 @@ def get_guess_hard(username):
 
             for i, (a, b) in enumerate(zip(guess_list, feedback)):
 
-                    label = tk.Label(guess_frame2, text=a.upper(),font=('Arial', 10))
-                    label.grid(row=tries, column=i, padx=10, pady=10)
+                    square_frame = tk.Frame(guess_frame2, width=20, height=20)
+                    square_frame.grid(row=tries, column=i, padx=10, pady=10)
 
+                    label = tk.Label(square_frame, text=a.upper(), font=('Arial', 10))
+                    label.place(relx=0.5, rely=0.5, anchor='center')
+                                
                     # Letters match, same position
                     if a == b:
+                        square_frame.config(bg=GREEN)
                         label.config(bg=GREEN, fg=BLACK)
 
                     # Letters match, wrong position
                     elif b == "$":
+                        square_frame.config(bg=YELLOW)
                         label.config(bg=YELLOW, fg=BLACK)
 
                     # Letters don't match            
                     else:
+                        square_frame.config(bg=BLACK)
                         label.config(bg=BLACK, fg=WHITE)
+
 
             tries += 1
 
